@@ -1,0 +1,18 @@
+# cfbarrio.libraries.yml
+
+global-styling:
+  version: 1.18
+  css:
+    theme:
+      css/style.min.css: {}
+  js:
+    js/custom.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - cfbarrio/bootstrap  # <-- On dépend de notre propre librairie bootstrap
+
+bootstrap:
+  js:
+    js/popper.min.js: { weight: -20 }
+    js/bootstrap.min.js: { weight: -19 }

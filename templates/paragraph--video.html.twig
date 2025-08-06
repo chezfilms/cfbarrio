@@ -1,0 +1,35 @@
+{# templates/paragraph/paragraph--video.html.twig #}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--video',
+  ]
+%}
+{% if view_mode %}
+  {% set classes = classes|merge(['paragraph--view-mode--' ~ view_mode|clean_class]) %}
+{% endif %}
+
+{# --- Début de la logique pour le ratio --- #}
+{# Classe CSS par défaut, basée sur le nom du terme par défaut "Ratio 16x9" #}
+{% set default_ratio_class = 'ratio-16x9' %}
+{% set ratio_class = default_ratio_class %} {# Initialiser avec le défaut #}
+
+{% if paragraph.field_ratio_video is not empty and paragraph.field_ratio_video.entity is not null %}
+  {# Récupérer le nom du terme sélectionné et le nettoyer #}
+  {% set selected_ratio_name = paragraph.field_ratio_video.entity.name.value %}
+  {% set ratio_class = selected_ratio_name|clean_class %}
+{% endif %}
+{# --- Fin de la logique pour le ratio --- #}
+
+<div{{ attributes.addClass(classes) }}>
+   {% if content.field_url_video %}
+     {# Ajoute la classe de ratio calculée (ex: "ratio-16x9") à la figure #}
+     <figure class="video-wrapper {{ ratio_class }}">
+       {{ content.field_url_video }}
+       {% if content.field_legende_video %}
+        <figcaption>{{ content.field_legende_video }}</figcaption>
+       {% endif %}
+     </figure>
+   {% endif %}
+</div>

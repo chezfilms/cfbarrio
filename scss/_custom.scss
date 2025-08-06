@@ -1,0 +1,1335 @@
+// Import des variables custom
+@import "variables";
+
+// --- Styles Globaux ---
+html {
+  font-size: $font-size-base;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $body-color;
+  background-color: $body-bg;
+}
+
+
+::selection {
+  background: rgba($accent-orange, 0.3);
+  color: $body-color;
+}
+
+
+// --- Layout Principal : Limiter la Largeur ---
+
+.container {
+  max-width: $text-max-width;
+}
+
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+  padding-left: $spacer;
+  padding-right: $spacer;
+}
+
+
+
+// --- Typographie Fine ---
+
+.text-formatted a,
+article a,
+.text-content a,
+{ 
+  text-decoration: underline;
+  text-decoration-color: $accent-orange;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+
+  &:hover {
+    text-decoration-color: $accent-orange;
+  }
+}
+
+blockquote {
+  // max-width: $narrow-max-width; 
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 3px solid $accent-orange;
+  padding-left: $spacer;
+  margin-top : $paragraph-margin-bottom * 1.5;
+  margin-bottom: $paragraph-margin-bottom * 1.5;
+  font-style: italic;
+  font-size: 1.1em;
+  color: $text-muted;
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  p.author{
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: $font-size-base;
+  font-style: normal;
+    color: $text-dark;
+  }
+}
+
+hr {
+  border-top: 1px solid $border-color;
+  margin: $spacer * 2 0;
+}
+
+
+ol ul {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+// --- Styles Basiques Blocs Drupal (Placeholders) ---
+.page-title {
+  margin-bottom: $spacer * 1.5;
+  font-weight: $headings-font-weight;
+}
+
+.site-branding {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+
+.navbar-brand span {
+  font-weight: bold;
+}
+
+.navbar-nav {
+  .nav-item {
+    > .nav-link:hover {
+      color: darken($link-hover-color, 5%); // Un peu plus sombre au survol
+    }
+    &.active > .nav-link {
+      // color: $accent-orange; // Utilise la couleur d'accent pour bien le marquer
+      // font-weight: 500; // Un peu plus de poids pour le distinguer
+      text-decoration: underline;
+      text-decoration-color: $accent-orange; // Couleur d'accent, non-transparente pour bien marquer
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+    }
+  }
+
+  .dropdown-menu {
+    .dropdown-item.active,
+    .dropdown-item:active {
+      background-color: rgba($accent-orange, 0.15); // Fond léger avec la couleur d'accent
+      color: $text-dark;                           // Force la couleur du texte à être foncée et lisible
+      text-decoration: underline;
+      text-decoration-color: $accent-orange;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+    }
+    .dropdown-item:hover {
+      background-color: rgba($accent-orange, 0.1); // Un fond légèrement plus subtil au survol
+      color: $text-dark;                          // Assure aussi la lisibilité au survol
+    text-decoration: none;
+    }
+  }
+}
+
+#block-cfbarrio-selecteurdelangue {
+  a {
+    color: rgba(0,0,0,0.65);
+  }
+
+  a:hover {
+    color: black;
+    text-decoration: none;
+  }
+
+  .links-inline span:first-child{
+    padding-right: 0;
+  }
+
+  .links-inline span:first-child:after{
+    content: "|";
+    padding-left: 5px;
+  }
+
+  .links-inline span:last-child{
+    padding-left: 5px;
+  }
+
+}
+
+
+// H1 page d'accueil
+
+.responsive-h1-separator span:first-child::after {
+    content: " | ";
+    padding-left: 0.25em; 
+    padding-right: 0.25em;
+}
+
+@media screen and (max-width: 1400px) {
+    .responsive-h1-separator span {
+        display: block; 
+    }
+    .responsive-h1-separator span:first-child::after {
+        content: ""; /* Pas de séparateur pipe sur mobile */
+        padding: 0; /* Enlève le padding aussi */
+    }
+}
+
+// --- Styles Généraux pour Sections de Landing Page ---
+
+// Classe pour les titres principaux de section
+.lp-section-title { // lp = landing page
+  margin-bottom: $spacer * 2 !important;
+  font-weight: $headings-font-weight;
+  color: $text-dark;
+  // text-align: center; // Optionnel: peut être géré par Bootstrap ou ici
+}
+
+// Arrière-plans pour alterner visuellement les sections
+.lp-bg-subtle {
+  background-color: darken($body-bg, 2%);
+}
+.lp-bg-accent { // Nouvelle classe pour un fond d'accent si besoin
+  background-color: $accent-orange; // Ou une autre couleur d'accent
+  color: $white; // Assurez un bon contraste pour le texte
+  .lp-section-title, p, li, strong, cite { // Assurer la lisibilité du texte sur fond d'accent
+    color: $white; // Ou une couleur contrastante appropriée
+  }
+  .lp-list-styled li::before { // Adapter la puce pour le fond d'accent
+    color: $white;
+  }
+  .lp-process-list li::before { // Adapter le numéro pour le fond d'accent
+    background-color: rgba($white, 0.2);
+    color: $white;
+  }
+}
+// Vous pourriez ajouter d'autres variantes : .lp-bg-dark, etc.
+
+// Utilitaire pour mettre en évidence du texte inline
+.lp-highlight-text {
+  font-weight: bold;
+  color: darken($text-dark, 5%);
+  // Si vous voulez un fond pour le highlight :
+  // background-color: rgba($accent-orange, 0.15);
+  // padding: 0.1em 0.3em;
+  // border-radius: $border-radius;
+}
+
+// --- Blocs de Contenu Spécifiques (Classes Réutilisables) ---
+
+// Pour une section "Héros"
+.lp-hero-section {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center; // Souvent le cas pour les héros
+
+  h1 { // Cibler le H1 à l'intérieur de cette section
+    line-height: 1.2;
+    // Bootstrap gère déjà la taille avec .display-4
+  }
+
+  .lp-hero-lead { // Classe spécifique pour le "lead" du héros
+     color: $text-muted;
+     font-weight: bold;
+     // Bootstrap gère déjà la taille et le poids avec .lead
+  }
+
+  .lp-hero-cta { // Classe pour le CTA principal du héros
+    // Hérite des styles de .btn-primary mais peut être surchargé ici
+    // Exemple si vous voulez toujours l'accent orange pour les CTA héros :
+
+    background-color: $accent-orange;
+    border-color: $accent-orange;
+    color: $text-dark;
+
+    &:hover, &:focus, &:active {
+      background-color: darken($accent-orange, 8%);
+      border-color: darken($accent-orange, 10%);
+      color: $text-dark;
+      text-decoration: none;
+    }
+
+  }
+}
+
+// Pour une section "Points Clés" ou "Services en Icônes"
+.lp-highlights-icons {
+  // text-align: center; // Souvent le cas
+  .lp-highlight-item {
+    // Marge gérée par les colonnes Bootstrap
+  }
+  .lp-highlight-icon {
+    max-width: 55px;
+    height: auto;
+    // margin-bottom: $spacer; // Si besoin, Bootstrap a mb-3
+  }
+  .lp-highlight-caption {
+    color: $text-dark;
+    font-weight: bold;
+    margin-top: 0;
+  }
+}
+
+// Pour des listes stylisées (à puces ou numérotées)
+.lp-list-styled {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    position: relative;
+    padding-left: 1.8rem;
+
+    &::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      color: $accent-orange;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  }
+  // Variante pour les résultats (cochés)
+  &.lp-list-results li::before {
+    content: "✓";
+    color: $green;
+  }
+}
+
+// Pour des listes de processus numérotées
+.lp-process-list {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: lp-process-counter;
+
+  li {
+    position: relative;
+    padding-left: 3.5rem;
+    counter-increment: lp-process-counter;
+    margin-bottom: $spacer * 1.5 !important;
+
+    &::before {
+      content: counter(lp-process-counter);
+      position: absolute;
+      left: 0;
+      top: -0.1em;
+      background-color: rgba($accent-orange, 0.2);
+      color: darken($accent-orange, 20%);
+      font-weight: bold;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-base * 0.9;
+    }
+
+    strong { // Titre de l'étape
+      display: block;
+      font-size: $font-size-base * 1.1;
+      margin-bottom: $spacer * 0.25;
+    }
+  }
+}
+
+// Pour les témoignages
+.lp-testimonial-item {
+  border-left: 4px solid $accent-orange; // Bordure plus visible
+  padding-left: $spacer * 1.5;
+  margin-bottom: $spacer * 2 !important;
+
+  .lp-testimonial-quote {
+    font-size: $font-size-base * 1.1;
+    font-style: italic;
+    color: $text-muted;
+    margin-bottom: $spacer;
+    // Pas besoin de guillemets stylisés par défaut, peuvent être ajoutés si besoin
+  }
+
+  .lp-testimonial-cite {
+    font-style: normal;
+    font-weight: bold;
+    color: $text-dark;
+    font-size: $font-size-base;
+    // text-align: right; // Souvent le cas, géré par Bootstrap d-block text-end
+  }
+}
+
+// Pour une section formulaire (ex: Newsletter)
+.lp-form-section {
+  .lp-form-control { // Si vous voulez un style spécifique pour les inputs de ces sections
+    // ...
+  }
+  .lp-form-submit-btn { // Si vous voulez un style spécifique pour les boutons de ces sections
+    // ...
+  }
+}
+
+
+// FOOTER
+
+.site-footer {
+  background-color: $text-dark;
+  color: rgba($white, 0.9);
+  margin-top: $spacer * 3;
+  border-top: $border-width solid $border-color;
+  font-size: $font-size-sm; // Taille de police de base pour le footer (ex: 14px)
+
+  // Styles généraux pour les liens dans le footer
+  // Ceux-ci s'appliqueront aux liens comme "Mentions Légales" s'ils n'ont pas de règles plus spécifiques
+  a {
+    color: rgba($white, 0.9);
+    text-decoration: none;
+    font-size: inherit;
+
+    &:hover,
+    &:focus {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+
+  // Styles spécifiques pour les éléments de menu footer (s'ils utilisent .nav-link)
+  .nav-link {
+    // Normalement hérite de 'a', mais on peut confirmer la couleur
+    color: rgba($white, 0.9);
+    font-size: inherit;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+
+  ul { // Pour les menus footer standards
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+  }
+
+  .site-footer__bottom p {
+    color: rgba($white, 0.6);
+  }
+
+  #block-cfbarrio-selecteurdelangue {
+    // Styles du bloc lui-même
+    margin: 0 0 $spacer 0;
+    padding: 0;
+    border: none;
+    background: none;
+
+    // --- LAYOUT : La solution simple et efficace ---
+    // Cibler la nav dans .content sous l'ID et changer la direction flex
+    .content nav.nav { // Cibler .nav est suffisant ici
+        display: flex; // S'assurer qu'elle reste flex
+        flex-direction: column; // <<< LA SOLUTION ! Empilement vertical.
+        align-items: flex-start; // Alignement gauche par défaut
+        padding: 0; // Reset
+        margin: 0;  // Reset
+    }
+
+    // --- Espacement des <span> (enfants de la nav) ---
+    // Pas besoin d'être aussi spécifique que la nav pour ça
+    .content nav.nav > span.nav-link {
+        margin: 0 0 ($spacer / 3) 0; // Espace sous chaque span
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+    }
+
+    // --- STYLE DES LIENS <a> (On essaie sans !important) ---
+    // Cible via ID + classe lien (devrait toujours fonctionner)
+    a.language-link {
+      padding: 0;
+      // Essayer SANS !important maintenant que le layout est stable
+      color: rgba($white, 0.9);
+      font-size: $font-size-sm; // Ou 14px si $font-size-sm est différent
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        color: $white;
+        text-decoration: underline;
+      }
+    } // Fin a.language-link
+
+  } // Fin #block-cfbarrio-selecteurdelangue
+
+} // Fin .site-footer
+
+
+// --- Responsive Adjustments (Exemples) ---
+@include media-breakpoint-down(sm) {
+  .hero-section {
+    min-height: auto; // Moins de hauteur sur mobile
+    padding-top: $spacer * 2;
+    padding-bottom: $spacer * 2;
+    margin-top: $spacer * 2;
+    margin-bottom: $spacer * 2;
+
+    h1 {
+      font-size: $h1-font-size * 0.8; // Réduire taille H1 sur petit écran
+    }
+    .lead {
+      font-size: $font-size-base; // Taille normale pour l'intro
+      font-weight: $font-weight-normal;
+    }
+    .cta-hero {
+      padding: $btn-padding-y $btn-padding-x; // Bouton taille normale
+      font-size: $font-size-base;
+    }
+  }
+
+  .section-title {
+    font-size: $h2-font-size * 0.9; // Réduire titre section
+    margin-bottom: $spacer * 1.5 !important;
+  }
+
+  .process-list li {
+    padding-left: 0; // Pas assez de place pour le numéro à gauche
+    &::before {
+      position: static; // Remettre le numéro dans le flux
+      display: inline-block; // Ou block si on veut une ligne dédiée
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem; // Espace si titre en dessous
+      width: auto; // Taille auto
+      height: auto;
+      background-color: transparent; // Pas de fond
+      border-radius: 0;
+      font-size: $font-size-base * 1.1; // Un peu plus gros
+      color: $text-dark; // Ou $accent-orange
+      font-weight: bold;
+    }
+  }
+
+  .newsletter-form .input-group {
+    // Peut-être forcer l'empilement si Bootstrap ne le fait pas bien
+    // display: flex;
+    // flex-direction: column;
+    // .form-control { margin-bottom: $spacer; border-radius: $input-border-radius !important; }
+    // .btn { width: 100%; border-radius: $btn-border-radius !important; }
+  }
+}
+
+
+// PAGE TITLE
+
+// --- Styles pour le Titre de Page (H1) ---
+// Cible le H1 à l'intérieur du bloc de titre de page spécifique
+#block-cfbarrio-page-title h1.title, #block-cfbarrio-articlestitle h1.title {
+  margin-bottom: $spacer * 0.75; // Réduire un peu la marge sous le texte lui-même
+  position: relative; // Toujours utile pour les pseudo-éléments absolus (même si pas utilisé ici)
+  display: inline-block; // Empêche le trait de prendre toute la largeur si le titre est court
+
+  &::after {
+    content: '';
+    display: block;
+    width: 70px;    // Largeur fixe du trait (ajustable)
+    height: 3px;    // Épaisseur du trait (ajustable)
+    background-color: $accent-orange; // Notre couleur d'accent !
+    margin-top: $spacer * 0.5;      // Espace entre le texte et le trait
+    margin-bottom: $spacer * 0.5;   // Espace APRÈS le trait, avant le contenu suivant
+    border-radius: 1px; // Optionnel : pour adoucir
+  }
+}
+
+// --- Typographie / Headings ---
+
+.clean-list {
+  list-style-type: none; // Masque les "1.", "2.", "3." automatiques
+  padding-left: 0;       // Supprime l'indentation par défaut des listes
+}
+
+h2, .h2 {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight; // Probablement 600 ou 700
+  line-height: $headings-line-height;
+  color: $text-dark;
+  margin-top: $spacer * 2.5;
+  margin-bottom: $spacer * 1.25;
+  // ... autres styles h2 ...
+}
+
+h3, .h3 {
+  font-family: $headings-font-family;
+  font-weight: 600; // Plus affirmé que 'normal', mais potentiellement moins que H2
+  color: $text-dark; // Couleur principale, pas 'muted'
+  font-size: 1.4rem; // Légèrement plus grand et distinct (ajustez si besoin)
+  line-height: $headings-line-height;
+  margin-top: $spacer * 2; // Plus d'espace avant une nouvelle étape
+  margin-bottom: $spacer * 0.75; // Moins d'espace avant le contenu de l'étape
+}
+
+h4, .h4 {
+  font-family: $headings-font-family;
+  font-weight: 500; // Poids moyen, distinct du texte normal et de H3
+  color: $text-dark;
+  font-size: 1.15rem; // Plus petit que H3 (ajustez si besoin)
+  line-height: $headings-line-height;
+  margin-top: $spacer * 1.5; // Espace avant le début d'un axe (après le <p> descriptif)
+  margin-bottom: $spacer * 0.5; // Moins d'espace avant le contenu de l'axe
+}
+
+
+dl {
+  margin-bottom: $spacer; // Espace après chaque paire Diagnostic/Approche
+}
+
+dt {
+  font-weight: $font-weight-bold; // Met en gras les termes "Diagnostic :" et "Approche :"
+  color: $text-dark; // Couleur principale (ou $text-muted si vous préférez plus discret)
+  // float: left; // Optionnel : pour mettre le dd à côté (moins courant, demande plus de CSS)
+  // clear: left; // Optionnel : si float est utilisé
+  // width: 100px; // Optionnel : si float est utilisé, définir une largeur
+  margin-bottom: $spacer * 0.25; // Petit espace avant la description
+}
+
+dd {
+  margin-left: 0; // Supprime l'indentation par défaut (plus moderne) OU conservez/ajustez si vous préférez l'indentation. Ex: margin-left: $spacer;
+  margin-bottom: $spacer * 0.75; // Espace après chaque description (dd) avant le prochain dt
+
+  // Assurer qu'il n'y a pas de marge en bas pour le dernier dd d'une dl
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.row-offcanvas.row-offcanvas-left {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+// Optionnel mais propre: Ajuster le padding de la colonne principale si nécessaire
+// Si la colonne <main> a toujours son padding et que tu as supprimé les marges
+// du .row, le contenu pourrait être légèrement décalé.
+// Il faut parfois aussi neutraliser le padding de cette colonne directe du .row.
+.row-offcanvas.row-offcanvas-left > main.main-content.col {
+  padding-left: 0;  // Décommente si tu vois un décalage / double padding
+  padding-right: 0; // Décommente si tu vois un décalage / double padding
+}
+
+
+// Styles pour le menu déroulant sur mobile/tablette
+// navbar-expand-lg signifie que le menu se réduit en dessous du point de rupture 'lg'
+@include media-breakpoint-down(lg) {
+
+  .navbar-collapse.collapse.show, // Cible la div quand elle est visible
+  .navbar-collapse.collapsing {    // Cible la div pendant l'animation
+    background-color: rgba($accent-orange, 0.05);
+
+    padding-top: $spacer * 0.75;
+    padding-bottom: $spacer;
+
+    border-top: $border-width solid $border-color;
+
+    .navbar-nav {
+      .nav-item {
+      }
+
+      .nav-link {
+        // Augmenter légèrement le padding pour une meilleure zone de clic
+        padding-top: $spacer * 0.6;
+        padding-bottom: $spacer * 0.6;
+        padding-left: $spacer; // Ajouter un peu de padding horizontal
+        padding-right: $spacer;
+        // S'assurer que la couleur du lien contraste bien avec le nouveau fond
+        color: $link-color; // Ou $text-dark
+
+        &:hover,
+        &:focus {
+          // Garder le hover subtil
+          color: $link-hover-color;
+          background-color: rgba($accent-orange, 0.1); // Léger fond au survol
+          text-decoration: $link-hover-decoration;
+        }
+      }
+    }
+
+    // Ajuster le style du formulaire éventuel dans le header
+    .navbar-form {
+      padding-top: $spacer * 0.5;
+      padding-bottom: $spacer * 0.5;
+      padding-left: $spacer;
+      padding-right: $spacer;
+      border-top: $border-width dashed $border-color; // Séparer visuellement
+      margin-top: $spacer * 0.5;
+    }
+  }
+
+  // Assurer que le collapse prend toute la largeur
+  .navbar-collapse {
+    width: 100%;
+  }
+}
+
+// Pour s'assurer que le bouton est cliquable (z-index) - si jamais il y a un problème d'overlap
+.navbar-toggler {
+  z-index: 10; // Donner un z-index au cas où
+}
+
+
+// Métadata avant chaque Article
+
+.node--type-article, #block-cfbarrio-views-block-featured-articles-block-1 {
+  .node-metadata-inline {
+    font-size: $font-size-sm; // Un peu plus petit
+    color: $text-muted;      // Couleur discrète
+    margin-bottom: $spacer; // Espace en dessous
+    line-height: 1.4;       // Hauteur de ligne normale
+
+    .metadata-separator {
+      margin: 0 0.5em; // Espace autour du séparateur '·'
+    }
+
+    .metadata-date {
+      font-weight: bold;
+      color: $accent-orange;
+    }
+
+    // Style spécifique pour les liens de tag si désiré
+    .metadata-tag {
+      color: $text-muted; // Garder la couleur discrète
+      text-decoration: none; // Pas de soulignement par défaut
+      margin-right: 0.5em; // Espace entre les tags
+
+      &:hover {
+        color: $link-hover-color; // Changer couleur au survol
+        text-decoration: $link-hover-decoration;
+      }
+
+      // Enlever la marge du dernier tag
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  // Cache potentiellement le bloc meta par défaut si besoin (normalement suffisant via Twig)
+  // .node__meta {
+  //   display: none;
+  // }
+}
+
+
+.node--type-article { 
+  .paragraph {
+    margin-left: auto; 
+    margin-right: auto;
+    margin-bottom: $paragraph-margin-bottom * 1.5;
+    max-width: $text-max-width;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.paragraph--type--texte-riche {
+}
+
+
+.node--type-article .paragraph--type--citation {
+  max-width: $narrow-max-width; 
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: $paragraph-margin-bottom * 1.5; 
+  .citation__text { 
+    margin-bottom: $spacer / 2;
+    p:last-child { margin-bottom: 0; }
+  }
+  .citation__auteur {
+    display: block;
+    font-style: normal;
+    font-weight: $headings-font-weight;
+    color: $text-dark;
+    text-align: left;
+    margin-top: $spacer / 1.5;
+    font-size: $font-size-sm;
+  }
+}
+
+.paragraph--type--image {
+  max-width: $text-max-width; 
+  margin-left: auto;
+  margin-right: auto;
+  figure {
+    margin: 0;
+    display: block; 
+    width: 100%;   
+    .field--name-field-media-image {
+      float: none; 
+      width: auto; 
+      // ou width: 100%; si on veut forcer le conteneur à prendre toute la place
+      margin-right: 0; 
+    }
+    img {
+      display: block; // Important pour margin: auto
+      width: 100%;
+      max-width: 100%; // Responsive
+      height: auto;
+    }
+    figcaption {
+      display: block; 
+      width: 100%;   
+      float: none; 
+      font-size: $font-size-sm;
+      color: $text-muted;
+      text-align: center;
+      margin-top: $spacer / 2;
+      padding-left: $spacer; 
+      padding-right: $spacer;
+      > .field {
+        margin-bottom: 0;
+        > :last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+
+.node--type-article .paragraph--type--lien-externe { 
+  max-width: $narrow-max-width; 
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: $paragraph-margin-bottom * 1.5; 
+  .lien-externe__wrapper {
+    display: flex;
+    align-items: flex-start;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    padding: $spacer;
+    background-color: darken($body-bg, 1.5%);
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; // Ajout transition border
+    &:hover {
+      background-color: darken($body-bg, 3%);
+      border-color: darken($border-color, 5%);
+    }
+  }
+  .lien-externe__image {
+    flex: 0 0 80px; // Ajustable
+    margin-right: $spacer;
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: $border-radius / 2;
+    }
+  }
+
+  .lien-externe__content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .lien-externe__lien {
+    margin-bottom: $spacer / 3;
+    font-weight: $headings-font-weight;
+    a {
+      &::after {
+        content: '↗';
+        display: inline-block;
+        margin-left: 0.3em;
+        font-size: 0.8em;
+        font-weight: normal;
+        color: $text-muted;
+        transition: color 0.2s ease-in-out;
+      }
+      &:hover::after {
+        color: $link-hover-color;
+      }
+    }
+  }
+  .lien-externe__description {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    line-height: $line-height-base * 0.9;
+    > :last-child { margin-bottom: 0; }
+  }
+  @include media-breakpoint-down(xs) {
+    .lien-externe__wrapper {
+      flex-direction: column;
+    }
+    .lien-externe__image {
+      flex-basis: auto;
+      width: 100px; // Ajustable
+      margin-right: 0;
+      margin-bottom: $spacer;
+    }
+  }
+} 
+
+.video-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+
+  iframe {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    background-color: darken($body-bg, 5%);
+  }
+
+  // Les classes de ratio restent ici
+  &.ratio-16x9 { iframe { aspect-ratio: 16 / 9; } }
+  &.ratio-1x1 { max-width: 80%; iframe { aspect-ratio: 1 / 1; } }
+  &.ratio-4x3 { max-width: 85%; iframe { aspect-ratio: 4 / 3; } }
+  &.ratio-9x16 { max-width: 45%; iframe { aspect-ratio: 9 / 16; } }
+  &.ratio-235x100 { iframe { aspect-ratio: 235 / 100; } }
+
+  figcaption {
+    display: block;
+    width: 100%;
+    font-size: $font-size-sm;
+    color: $text-muted;
+    text-align: center;
+    margin-top: $spacer / 2;
+    padding-left: $spacer / 2;
+    padding-right: $spacer / 2;
+    > .field { margin-bottom: 0; > :last-child { margin-bottom: 0; } }
+  }
+}
+
+
+// Style spécifique au conteneur du paragraphe
+.paragraph--type--video {
+  max-width: $text-max-width; 
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: $paragraph-margin-bottom * 1.5; 
+  // Il n'y a plus besoin de styler figure, iframe, etc. ici.
+}
+
+// Style spécifique pour les vidéos dans le contenu principal (CKEditor)
+// pour qu'elles aient la même largeur max que les paragraphes.
+.text-formatted {
+  .video-wrapper {
+    max-width: $text-max-width;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: $paragraph-margin-bottom * 1.5; // Utilisons la même marge
+  }
+}
+
+label.form-required::after {
+  background-image:unset;
+  content: "*";
+  color: $danger;
+}
+
+// FILM
+
+// --- Styles GÉNÉRAUX pour le bloc .node-metadata-inline ---
+
+.path-frontpage .node-metadata-inline,
+.node--type-portfolio .node-metadata-inline,
+.page-view-films .node-metadata-inline {
+  font-size: $font-size-sm;
+  color: $text-muted; // Couleur par défaut pour les spans
+  margin-bottom: $spacer * 0.75;
+  line-height: 1.5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+
+  > span {
+    margin-right: 0.4em;
+    &:not(:first-child)::before { content: '·'; margin-right: 0.4em; }
+    &:last-of-type { margin-right: 0; }
+
+    &:not(.metadata-tags) a {
+       color: inherit; 
+       text-decoration: none; 
+       &:hover {
+          color: $link-hover-color; // Appliquer la couleur de survol standard
+          text-decoration: $link-hover-decoration;
+       }
+    }
+  }
+  .metadata-runtime { white-space: nowrap; }
+  .metadata-category {font-weight: bold;}
+} // Fin .node-metadata-inline
+
+
+
+// --- Styles GÉNÉRAUX pour le conteneur .metadata-tags et ses liens <a> ---
+.metadata-tags {
+  font-size: $font-size-sm;
+  margin-left: 0.5em;
+  display: inline;
+
+  a {
+    color: $text-muted; // Garder les tags discrets
+    text-decoration: none;
+    margin-right: 0.3em;
+    display: inline-block;
+
+    // Ajoute le '#' AVANT chaque tag (UNE SEULE FOIS, ICI)
+    &::before {
+      content: "#";
+    }
+
+    &:hover {
+      color: $link-hover-color;
+      text-decoration: $link-hover-decoration;
+    }
+    &:last-child { margin-right: 0; }
+  } // Fin a
+} // Fin .metadata-tags
+
+
+// FILMS
+
+.view-portfolio,
+.view-featured-portfolio,
+.view-featured-portfolio-fiction
+{
+  .portfolio-list-item.views-row {
+    display: flex; /* ... autres styles flex ... */
+    gap: $spacer * 1.5;
+    margin-bottom: $spacer * 5;
+    align-items: flex-start;
+
+    > .views-field-nothing { /* ... styles thumbnail ... */
+      flex: 0 0 45%;
+      max-width: 45%;
+      img { display: block; max-width: 100%; height: auto; }
+    }
+
+    > .views-field-nothing-1 { 
+      flex: 1 1 auto;
+
+      h3 {
+        margin-top: -0.3em;
+        margin-bottom: $spacer * 0.5;
+        font-size: $h3-font-size;
+      }
+      .node-metadata-inline { 
+        margin-bottom: $spacer * 0.75;
+      }
+
+      p { 
+        margin-top: 0; 
+        margin-bottom: $spacer * 0.75; 
+        font-size: $font-size-base; 
+        color: $body-color; 
+      }
+
+      .metadata-tags { 
+        display: block; 
+        margin-top: $spacer * 0.5;
+        margin-left: 0; 
+      }
+    }
+
+    @include media-breakpoint-down(md) { 
+
+      h3 {
+        margin-top: unset;
+        padding-top: $spacer;
+      }
+
+      flex-direction: column;
+      gap: $spacer * 0.5;
+
+      > .views-field-nothing { 
+        flex-basis: auto; 
+        width: 100%;     
+        max-width: 100%; 
+        margin-bottom: 0;
+        .field-content, 
+        .field--name-field-media-image,
+        .field__item {
+          padding: 0;
+          margin: 0;
+          line-height: 0; // Éviter espace potentiel sous l'image inline-block
+        }
+        img { width: 100%; }
+      }
+
+      // La colonne info prend aussi toute la largeur (déjà le cas avec flex: 1)
+      > .views-field-nothing-1 { 
+        // Pas besoin de changer grand chose ici, elle prendra la largeur
+      }
+    } // --- Fin Media Query ---
+
+  }
+} // Fin .view-films
+
+// CREDITS ET GENERIQUES
+
+
+.node--type-portfolio { 
+
+  .node__credits-section {
+    // Centrer le bloc générique globalement
+    max-width: $text-max-width; 
+    margin: ($spacer * 2) auto; 
+    padding-top: $spacer; 
+    border-top: $border-width solid $border-color; // Séparateur visuel
+
+    // Cibler le conteneur du champ générique lui-même
+    .field--name-field-credits {
+      .field__items {
+      }
+      .field__item {
+         margin-bottom: $spacer * 0.5; // Espace vertical entre chaque ligne de crédit
+         &:last-child {
+           margin-bottom: 0;
+         }
+      }
+    }
+  } // Fin .node__credits-section
+
+  // --- Styles pour chaque ligne de crédit (Paragraphe) ---
+
+  .paragraph--type--credit.credit-line { // Cible notre paragraphe via sa nouvelle classe
+    display: flex;                // Active Flexbox
+    justify-content: space-between; // Pousse les deux colonnes aux extrémités
+    align-items: baseline;        // Aligne le texte sur la ligne de base
+
+    // Styles pour la colonne "Fonction"
+    .credit-job {
+      width: 45%;             // Donne une largeur (ajustable)
+      text-align: right;      // Aligne le texte à droite
+      padding-right: $spacer; // Espace avant le centre
+      color: $text-muted;     // Rendre la fonction plus discrète (optionnel)
+
+      // Style du contenu du champ (le lien <a>)
+      .field__item > a {
+        color: inherit; // Hérite la couleur (muted)
+        text-decoration: none;
+        &:hover {
+           color: $link-hover-color;
+           text-decoration: $link-hover-decoration;
+        }
+      }
+    }
+
+    // Styles pour la colonne "Personne + Info"
+    .credit-person-info {
+      width: 45%;            // Donne une largeur (ajustable)
+      text-align: left;      // Aligne le texte à gauche
+      padding-left: $spacer; // Espace après le centre
+
+      // Style du contenu du champ "Qui" (le lien <a>)
+      .field--name-field-qui .field__item > a {
+         font-weight: 600; // Mettre le nom en un peu plus gras (optionnel)
+         color: $link-color; // Couleur normale des liens
+         text-decoration: none;
+         &:hover {
+           color: $link-hover-color;
+           text-decoration: $link-hover-decoration;
+         }
+      }
+
+      // Style pour l'info supplémentaire
+      .credit-info {
+        display: block; // Passe à la ligne sous le nom
+        font-size: $font-size-sm * 0.9; // Plus petit
+        color: $text-muted; // Discret
+        margin-top: 0.1em; // Petit espace sous le nom
+        font-style: italic; // Optionnel
+
+         // Style du contenu du champ "Info"
+         .field__item {
+           // Pas de style spécifique nécessaire ici normalement
+         }
+      }
+    }
+  } 
+} 
+
+// FEATURED ARTICLES
+
+#block-cfbarrio-views-block-featured-articles-block-1 {
+  background-color: darken($body-bg, 2%);
+}
+
+.view-featured-articles {
+  .views-row {
+    display: flex; /* ... autres styles flex ... */
+    gap: $spacer * 1.5;
+    margin-bottom: $spacer * 5;
+    align-items: flex-start;
+
+    > .views-field-nothing { /* ... styles thumbnail ... */
+      flex: 0 0 45%;
+      max-width: 45%;
+      img { display: block; max-width: 100%; height: auto; }
+    }
+
+    > .views-field-nothing-1 { 
+      flex: 1 1 auto;
+
+      h3 {
+        margin-top: -0.3em;
+        margin-bottom: $spacer * 0.5;
+        font-size: $h3-font-size;
+      }
+      .node-metadata-inline { /* ... styles marges si besoin ... */
+        margin-bottom: $spacer * 0.75;
+
+      }
+
+      p { 
+        margin-top: 0; 
+        margin-bottom: $spacer * 0.75;
+        font-size: $font-size-base;
+        color: $body-color;
+      }
+
+      .metadata-tags {
+        display: block;
+        margin-top: $spacer * 0.5;
+        margin-left: 0;
+      }
+    }
+
+    @include media-breakpoint-down(md) { // En dessous de 992px (tablettes et mobiles)
+
+      h3 {
+        margin-top: unset;
+        padding-top: $spacer;
+      }
+
+      // Change la direction de Flexbox en colonne
+      flex-direction: column;
+      // Optionnel: Réduire l'espace entre image et texte sur mobile
+      gap: $spacer * 0.5;
+
+      // Laisser la miniature prendre toute la largeur disponible
+      > .views-field-nothing { 
+        flex-basis: auto; // Annule la base fixe
+        width: 100%;      // Prend toute la largeur
+        max-width: 100%;  // Prend toute la largeur
+        margin-bottom: 0; // Ajoute un peu d'espace en dessous de l'image
+        .field-content, // Cible les wrappers potentiels de Views/Drupal
+        .field--name-field-media-image,
+        .field__item {
+          padding: 0;
+          margin: 0;
+          line-height: 0; // Éviter espace potentiel sous l'image inline-block
+        }
+        img { width: 100%; }
+      }
+
+      // La colonne info prend aussi toute la largeur (déjà le cas avec flex: 1)
+      > .views-field-nothing-1 { 
+        // Pas besoin de changer grand chose ici, elle prendra la largeur
+      }
+    } // --- Fin Media Query ---
+
+  }
+} 
+
+
+// SCSS pour les images intégrées dans le contenu (via CKEditor / Media Library)
+.node__content .field--name-body figure.caption-drupal-media,
+.text-formatted figure.caption-drupal-media {
+  max-width: 100%; 
+  margin-bottom: $paragraph-margin-bottom * 1.5;
+  margin-left: auto;
+  margin-right: auto;
+  img {
+    display: block; 
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    max-height: 75vh;
+    margin: 0 auto;
+  }
+  figcaption {
+    display: block;
+    width: 100%;
+    font-size: $font-size-sm;
+    color: $text-muted;
+    text-align: center;
+    margin-top: $spacer / 2;
+  }
+}
+
+// OFFRE Clarté stratégique
+
+// --- Bloc Livrable sur les pages d'offres ---
+
+.lp-deliverable-box {
+  display: flex;
+  align-items: flex-start; // Aligne le haut du texte avec le haut de l'icône
+  gap: $spacer * 1.25;
+  background-color: transparent; // Ou darken($body-bg, 1%) si vous voulez un fond très léger
+  border: $border-width solid $border-color;
+  padding: $spacer * 1.25;
+  border-radius: $border-radius;
+  
+  .lp-deliverable-icon {
+    flex: 0 0 60px; // L'icône ne grandit pas, ne rétrécit pas, et fait 60px de large
+    margin-top: 0.25rem; // Petit ajustement pour l'alignement vertical si besoin
+  }
+  
+  .lp-deliverable-content {
+    flex: 1 1 auto; // Le contenu prend le reste de la place
+    
+    h4, .h5 {
+      margin-top: 0;
+      color: $text-dark;
+    }
+  }
+}
+
+// --- Bloc "Et après" sur les pages d'offres ---
+
+.lp-next-step-box {
+  background-color: darken($body-bg, 1.5%); // Un fond très subtil, un peu comme .lien-externe__wrapper
+  border-left: 3px solid rgba($accent-orange, 0.5); // Réutilise le style de bordure de blockquote mais en plus léger
+  padding: $spacer * 1.25;
+  border-radius: $border-radius;
+  margin-top: $spacer * 2.5 !important; // Assure un bon espace au-dessus
+
+  h4, .h5 { // Cible le titre à l'intérieur
+    margin-top: 0;
+    color: $text-dark;
+  }
+
+  // Assurer que la liste à l'intérieur est bien stylée
+  .lp-list-styled {
+    li {
+      margin-bottom: $spacer * 0.5;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Pour la dernière ligne en italique
+  p.fst-italic {
+    font-size: $font-size-sm;
+    color: $text-muted;
+  }
+}
+
+.cta-offer-box {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+}

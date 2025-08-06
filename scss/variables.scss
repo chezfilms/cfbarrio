@@ -1,0 +1,112 @@
+// cfbarrio/scss/variables.scss
+
+// --- 1. Définitions Originales (Conservées pour Compatibilité Barrio) ---
+// Ces variables sont définies mais peu utilisées directement par notre thème custom,
+// sauf si des composants Barrio (comme commerce, comments) les requièrent.
+
+$primary-shade: rgb(255, 78, 46); // Orange-rouge (original)
+$primary-light: tint-color($primary-shade, 37%);
+$primary-dark: shade-color($primary-shade, 12%);
+$accent-shade: #0079C0;           // Bleu (original)
+$accent-light: tint-color($accent-shade, 37%);
+$accent-dark: shade-color($accent-shade, 12%);
+
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-800: #343a40;
+$red: #dc3545;
+$yellow: #ffc107;
+$green: #28a745;
+$cyan: #17a2b8; // Conservé mais peu utilisé par nous
+
+// Variables "brand" spécifiques (conservées pour compatibilité)
+$brand-primary: $accent-shade;
+$brand-inverse: $primary-shade;
+
+// Variables "inverse" (conservées pour compatibilité)
+$inverse-bg: $primary-shade;
+$inverse-color: $white;
+
+// --- 2. Notre Palette Personnalisée ---
+$beige-bg: #FAF8F2;      // Fond principal doux
+$text-dark: #333333;     // Texte principal
+$text-muted: #757575;    // Texte secondaire
+$accent-orange: #ebbb6a; // Orange pastel pour l'accentuation
+$link-color: $text-dark; // Liens sombres
+
+
+// --- 3. Application de NOTRE Palette aux Variables Bootstrap ---
+// C'est ici qu'on définit l'apparence réelle du site.
+
+$text-max-width: 840px;  // Default width for text-based paragraphs
+$narrow-max-width: 680px;  // Default width for narrow elements (citations)
+// $full-width-max-width:    none; // If you need a full-width option later
+
+
+// Body
+$body-bg: $beige-bg;
+$body-color: $text-dark;
+
+// Couleurs Sémantiques Bootstrap (Utilisant notre palette)
+$primary:       $link-color; // Primaire = couleur liens (sombre)
+$secondary:     $text-muted;
+$success:       $green;
+$info:          $accent-orange; // Info = notre couleur d'accent !
+$warning:       $yellow;
+$danger:        $red;
+$light:         $beige-bg;     // Thème light = notre fond
+$dark:          $text-dark;    // Thème dark = notre texte
+
+// --- 4. Typographie ---
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-serif: Georgia, "Times New Roman", Times, serif;
+
+$font-family-base: $font-family-sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.6;
+$headings-font-family: $font-family-base;
+$headings-font-weight: 600;
+$headings-line-height: 1.3;
+$paragraph-margin-bottom: 1.2rem;
+$enable-responsive-font-sizes: true;
+
+// --- 5. Liens ---
+$link-color: $link-color;
+$link-decoration: none;
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: underline;
+
+// --- 6. Composants Minimalistes ---
+$border-width: 1px;
+$border-color: darken($body-bg, 10%); // Basé sur notre $body-bg
+$border-radius: 0.2rem;
+
+// Boutons
+$btn-padding-y: 0.4rem;
+$btn-padding-x: 1rem;
+$btn-font-weight: 600;
+$btn-border-radius: $border-radius;
+// Option: Boutons primaires en orange
+// $btn-primary-bg: $accent-orange;
+// $btn-primary-border: $accent-orange;
+// $btn-primary-color: $text-dark;
+
+// Formulaires
+$input-padding-y: $btn-padding-y;
+$input-padding-x: $btn-padding-x;
+$input-bg: darken($body-bg, 2%); // Basé sur notre $body-bg
+$input-border-color: $border-color;
+$input-border-radius: $border-radius;
+$input-box-shadow: none;
+$input-focus-box-shadow: none;
+$input-focus-border-color: $accent-orange; // Notre accent
+
+// --- 7. Features Bootstrap & Divers (Conservés) ---
+$enable-shadows: false;
+$enable-gradients: false;
+$enable-caret: true;
+$comment-spacer-x: 1.25em;
+$comment-spacer-y: 1.25em;
+$breadcrumb-divider: quote(">");
+
+// --- Fin des variables ---

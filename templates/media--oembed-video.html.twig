@@ -1,0 +1,31 @@
+{#
+@file
+Thème pour le rendu d'une vidéo distante intégrée (oEmbed).
+
+Ce template est modifié pour correspondre à la structure des paragraphes vidéo
+et assurer une cohérence visuelle.
+#}
+{#
+  Le principal compromis ici est que nous n'avons pas de champ "Ratio"
+  comme dans le paragraphe. Nous allons donc appliquer une classe par défaut,
+  généralement la plus commune : 'ratio-16x9'.
+#}
+{% set default_ratio_class = 'ratio-16x9' %}
+<h2>MA super vidéo !</h2>
+
+{#
+  CKEditor 5 permet d'ajouter une légende (caption) aux médias.
+  Cette légende est disponible dans la variable 'content.field_media_oembed_video['#context'].caption'.
+  Nous vérifions si elle existe pour l'afficher.
+#}
+{% set caption = content.field_media_oembed_video['#context'].caption|render|striptags('<p><a><strong><em>')|trim %}
+
+<figure class="video-wrapper {{ default_ratio_class }}">
+  {# La variable 'content' contient l'iframe de la vidéo. #}
+  {{ content }}
+
+  {# Si une légende a été saisie dans CKEditor, on l'affiche dans un <figcaption> #}
+  {% if caption is not empty %}
+    <figcaption>{{ caption|raw }}</figcaption>
+  {% endif %}
+</figure>

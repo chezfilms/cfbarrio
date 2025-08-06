@@ -1,0 +1,21 @@
+{# templates/paragraph/paragraph--credit.html.twig #}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    'credit-line' # Déplace le commentaire hors de la définition du tableau
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div class="credit-job">
+    {{ content.field_credit_job }}
+  </div>
+
+  <div class="credit-person-info">
+    {{ content.field_credit_qui }}
+    {% if content.field_credit_info %}
+      <div class="credit-info">{{ content.field_credit_info }}</div>
+    {% endif %}
+  </div>
+</div>

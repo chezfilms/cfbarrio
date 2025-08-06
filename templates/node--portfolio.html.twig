@@ -1,0 +1,80 @@
+{# node--portfolio.html.twig #}
+{{ attach_library('bootstrap_barrio/node') }}
+
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  <header>
+    {# Section Métadata pour Film #}
+    <div class="node-metadata-inline">
+      {% if node.field_categorie.entity %}
+        <span class="metadata-category">{{ node.field_categorie.entity.label }}</span>
+      {% endif %}
+
+      {% if node.field_client.entity %}
+        <span class="metadata-client">{{ node.field_client.entity.label }}</span>
+      {% endif %}
+
+      {% if node.field_episodes.value and node.field_minutage.value %}
+        <span class="metadata-runtime">{{ node.field_episodes.value }} x {{ node.field_minutage.value }} min</span>
+      {% elseif node.field_minutage.value %}
+        <span class="metadata-runtime">{{ node.field_minutage.value }} min</span>
+      {% endif %}
+
+      {% if node.field_annee.value %}
+        <span class="metadata-year">{{ node.field_annee.value }}</span>
+      {% endif %}
+
+      {% if node.field_tags is not empty %}
+        <span class="metadata-tags">
+          {% for item in node.field_tags %}
+            {% set term = item.entity %}
+            {% if term %}
+               <a href="{{ url('entity.taxonomy_term.canonical', {'taxonomy_term': term.id}) }}" class="metadata-tag">{{- term.label -}}</a>
+            {% endif %}
+          {% endfor %}
+        </span>
+      {% endif %}
+
+    </div>
+  </header>
+
+  <div class="node__summary-section"> 
+    {% if node.field_meta_description %}
+    <p>{{ node.field_meta_description.value|raw }}</p>
+    {% endif %}
+  </div>
+
+  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+      {{ content|without(
+      'field_categorie',
+      'field_client',
+      'field_minutage',
+      'field_annee',
+      'field_tags',
+      'field_meta_description',
+      'links',
+      'field_portfolio',
+      'field_body',
+      'field_credits'
+      ) }}
+  </div>
+
+  {% if node.field_credits is not empty %}
+  <div class="node__credits-section">
+      <h2 class="text-center mb-5">Générique</h2>
+      {{ content.field_credits }}
+  </div>
+  {% endif %}
+
+</article>
+
