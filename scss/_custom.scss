@@ -1,9 +1,9 @@
 // Import des variables custom
 @import "variables";
 
-// --- Styles Globaux ---
 html {
   font-size: $font-size-base;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -168,7 +168,7 @@ ol ul {
 }
 
 
-// H1 page d'accueil
+// FRONTPAGE H1 page d'accueil
 
 .responsive-h1-separator span:first-child::after {
     content: " | ";
@@ -242,27 +242,75 @@ ol ul {
   }
 
   .lp-hero-lead { // Classe spécifique pour le "lead" du héros
-     color: $text-muted;
-     font-weight: bold;
-     // Bootstrap gère déjà la taille et le poids avec .lead
+    color: $text-muted;
+    // font-weight: bold;
+    // Bootstrap gère déjà la taille et le poids avec .lead
+  }
+}
+
+.btn-cta-segment {
+  text-decoration: none !important; // !important est nécessaire pour outrepasser la règle générale
+  background-color: $beige-bg;
+  border: 1px solid $text-dark;
+  color: $text-dark;
+  transition: all 0.2s ease-in-out;
+
+  strong {
+    text-decoration: underline;
+    text-decoration-color: $accent-orange;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease-in-out; // Pour le survol
   }
 
-  .lp-hero-cta { // Classe pour le CTA principal du héros
-    // Hérite des styles de .btn-primary mais peut être surchargé ici
-    // Exemple si vous voulez toujours l'accent orange pour les CTA héros :
+  small {
+    color: $text-muted;
+    text-decoration: none; // Déclaration explicite pour plus de clarté
+    transition: color 0.2s ease-in-out;
+  }
 
-    background-color: $accent-orange;
-    border-color: $accent-orange;
-    color: $text-dark;
+  &:hover, &:focus {
+    background-color: $text-dark; // Fond sombre au survol
+    border-color: $text-dark;
+    color: white; // Le texte principal (strong) devient blanc
 
-    &:hover, &:focus, &:active {
-      background-color: darken($accent-orange, 8%);
-      border-color: darken($accent-orange, 10%);
-      color: $text-dark;
-      text-decoration: none;
+    strong {
+      text-decoration-color: white;
     }
 
+    small {
+      color: white;
+    }
   }
+}
+
+/* Styles pour la section des logos clients sur la page d'accueil */
+
+.client-logos-section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.client-logo {
+    height: 95px;
+    width: auto;
+    transition: filter 0.3s ease; 
+    filter: brightness(100%) contrast(100%); 
+}
+
+.client-logo-link:hover .client-logo {
+    filter: brightness(80%) contrast(120%); 
+}
+
+
+@media (max-width: 768px) {
+    .client-logo {
+        height: 60px; /* Plus petit sur mobile pour économiser de la place */
+        /* Pas besoin de max-width puisque la hauteur et la largeur auto gèrent la proportion */
+    }
+    .client-logos-section .d-flex {
+        gap: 1rem; /* Moins d'espace entre les logos sur mobile */
+    }
 }
 
 // Pour une section "Points Clés" ou "Services en Icônes"
@@ -281,6 +329,13 @@ ol ul {
     font-weight: bold;
     margin-top: 0;
   }
+}
+
+.lp-process-flow span:not(:last-child)::after {
+    content: "/";
+    margin: 0 5px 0 10px; 
+    color: $accent-orange;
+    font-weight: bold; 
 }
 
 // Pour des listes stylisées (à puces ou numérotées)
@@ -368,6 +423,9 @@ ol ul {
     // text-align: right; // Souvent le cas, géré par Bootstrap d-block text-end
   }
 }
+
+
+// FORMULAIRE
 
 // Pour une section formulaire (ex: Newsletter)
 .lp-form-section {
@@ -943,7 +1001,7 @@ label.form-required::after {
 
 .path-frontpage .node-metadata-inline,
 .node--type-portfolio .node-metadata-inline,
-.page-view-films .node-metadata-inline {
+.page-view-portfolio .node-metadata-inline {
   font-size: $font-size-sm;
   color: $text-muted; // Couleur par défaut pour les spans
   margin-bottom: $spacer * 0.75;
@@ -972,7 +1030,6 @@ label.form-required::after {
 
 
 
-// --- Styles GÉNÉRAUX pour le conteneur .metadata-tags et ses liens <a> ---
 .metadata-tags {
   font-size: $font-size-sm;
   margin-left: 0.5em;
@@ -984,7 +1041,6 @@ label.form-required::after {
     margin-right: 0.3em;
     display: inline-block;
 
-    // Ajoute le '#' AVANT chaque tag (UNE SEULE FOIS, ICI)
     &::before {
       content: "#";
     }
@@ -994,8 +1050,8 @@ label.form-required::after {
       text-decoration: $link-hover-decoration;
     }
     &:last-child { margin-right: 0; }
-  } // Fin a
-} // Fin .metadata-tags
+  }
+} 
 
 
 // FILMS
@@ -1333,3 +1389,114 @@ label.form-required::after {
   border: 1px solid #dee2e6;
   border-radius: 0.5rem;
 }
+
+
+
+
+// TABLEAU SASS
+
+ .text-muted-custom {
+        color: var(--text-muted) !important;
+    }
+
+    .btn-custom-accent {
+        background-color: var(--accent-orange);
+        border-color: var(--accent-orange);
+        color: var(--text-dark); /* Texte sombre sur l'orange */
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-custom-accent:hover {
+        /* Valeur pré-calculée pour simuler un darken de SASS */
+        background-color: #d6a75f;
+        border-color: #d6a75f;
+        color: var(--text-dark);
+        opacity: 0.9;
+    }
+
+    .card-header-custom {
+        background-color: var(--accent-orange);
+        color: var(--text-dark);
+        font-weight: bold;
+        font-size: 1.25rem;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .card-body {
+        background-color: white; /* Les cartes auront un fond blanc pour ressortir */
+        color: var(--text-dark);
+        display: flex; /* Permet à flex-direction: column de fonctionner */
+        flex-direction: column;
+    }
+
+    .card {
+        border-radius: 0.5rem;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,.125); /* Bordure Bootstrap par défaut */
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); /* Ombre légère */
+    }
+
+    .price {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--accent-orange);
+        margin-bottom: 1rem;
+    }
+
+    .price small {
+        font-size: 1rem;
+        color: var(--text-muted);
+    }
+
+    /* Classe pour les titres de section H4 afin de garantir une hauteur et un alignement cohérents */
+    .section-title-fixed {
+        min-height: 2.2em; /* Ajustez si nécessaire pour que le texte + badge tienne sur une ligne */
+        display: flex; /* Utilise flexbox pour aligner le texte et le badge */
+        align-items: center; /* Centre verticalement le texte et le badge */
+        flex-wrap: nowrap; /* Empêche le contenu de passer à la ligne */
+        font-size: 1.15rem; /* Peut être légèrement réduit pour mieux tenir */
+        font-weight: bold;
+    }
+    
+    /* Style spécifique pour le badge "Inclus" pour qu'il soit bien visible et cohérent */
+    .badge.bg-custom-accent-badge {
+        background-color: var(--accent-orange) !important;
+        color: var(--text-dark) !important; /* Texte sombre sur l'orange */
+        font-weight: normal;
+        white-space: nowrap; /* Empêche le badge lui-même de passer à la ligne */
+    }
+
+    .list-group-item {
+        border: none;
+        padding-left: 0; /* Réinitialiser le padding si nécessaire */
+        background-color: transparent; /* Fond transparent pour la liste */
+        position: relative; /* Pour positionner le checkmark */
+        padding-left: 1.5rem; /* Espace pour le checkmark */
+        text-align: left; /* Assure que le texte est aligné à gauche */
+    }
+
+    .list-group-item::before {
+        content: "✓"; /* Checkmark visuel */
+        color: var(--accent-orange);
+        font-weight: bold;
+        position: absolute; /* Positionne le checkmark */
+        left: 0; /* Aligné au début de l'élément */
+        top: 0.15rem; /* Ajuste la position verticale */
+        line-height: inherit; /* Hérite de la hauteur de ligne pour un bon alignement */
+    }
+
+    /* Assure que les cartes ont la même hauteur, essentiel pour la comparaison visuelle */
+    .row.align-items-stretch {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .row.align-items-stretch > .col {
+        display: flex;
+        flex-direction: column;
+    }
+    .row.align-items-stretch > .col > .card {
+        flex-grow: 1;
+    }
+

@@ -1,4 +1,4 @@
-{# page.html.twig #}
+{# page--node--solution.html.twig #}
 {% extends "@bootstrap_barrio/layout/page.html.twig" %}
 
 {#
@@ -116,25 +116,15 @@
         </nav>
 {% endblock %}
 
-
 {% block content %}
-
-{% set main_content_classes = ['main-content'] %}
-{% if no_main_container is defined and no_main_container %}
-{% set main_content_classes = main_content_classes|merge(['main-content--no-container']) %}
-{% else %}
-{% set main_content_classes = main_content_classes|merge(['container']) %}
-{% endif %}
-{# === Fin Définition === #}
-
-<div id="main" class="{{ col_main }}">
+<div id="main"> 
     {{ page.breadcrumb }}
     <div class="row row-offcanvas row-offcanvas-left clearfix">
         <main{{ content_attributes }}>
-            <div class="{{ main_content_classes|join(' ') }}"> 
+            <section class="section"> {# <-- mettre la classe container ici ? #}
                 <a href="#main-content" id="main-content" tabindex="-1"></a>
                 {{ page.content }}
-            </div>
+            </section>
         </main>
         {% if sidebar_first_exists %}
         <div{{ sidebar_first_attributes }}>
